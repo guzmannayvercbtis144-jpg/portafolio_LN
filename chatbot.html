@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema con Código y Glosario - Neón</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-40px) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(-5deg); }
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { 
+                text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
+            }
+            50% { 
+                text-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff, 0 0 60px #0ff, 0 0 80px #0ff;
+            }
+        }
+
+        @keyframes neonBorder {
+            0%, 100% { 
+                box-shadow: 0 0 10px #f0f, 0 0 20px #f0f, 0 0 30px #f0f;
+            }
+            50% { 
+                box-shadow: 0 0 20px #f0f, 0 0 40px #f0f, 0 0 60px #f0f, 0 0 80px #f0f;
+            }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        body {
+            font-family: 'Orbitron', 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.03) 0px, transparent 2px, transparent 4px, rgba(0, 255, 255, 0.03) 6px),
+                repeating-linear-gradient(90deg, rgba(255, 0, 255, 0.03) 0px, transparent 2px, transparent 4px, rgba(255, 0, 255, 0.03) 6px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-l {
+            position: fixed;
+            top: 15%;
+            right: 10%;
+            font-size: 15em;
+            font-weight: bold;
+            color: transparent;
+            background: linear-gradient(45deg, #0ff, #f0f, #0ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            text-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.8),
+                0 0 40px rgba(255, 0, 255, 0.6),
+                0 0 60px rgba(0, 255, 255, 0.4);
+            animation: float 6s ease-in-out infinite, neonPulse 2s ease-in-out infinite;
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            color: #0ff;
+            margin-bottom: 50px;
+            animation: neonPulse 3s ease-in-out infinite;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 
+                0 0 10px #0ff,
+                0 0 20px #0ff,
+                0 0 30px #0ff,
+                0 0 40px #0ff;
+            letter-spacing: 3px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #f0f;
+            text-shadow: 
+                0 0 10px #f0f,
+                0 0 20px #f0f;
+        }
+
+        .content-wrapper {
+            background: rgba(20, 20, 30, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid #0ff;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.5),
+                0 0 40px rgba(255, 0, 255, 0.3),
+                inset 0 0 60px rgba(0, 255, 255, 0.1);
+            animation: neonBorder 3s ease-in-out infinite;
+        }
+
+        .tema-titulo {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(255, 0, 255, 0.2) 100%);
+            color: #0ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 2px solid #f0f;
+            box-shadow: 
+                0 0 20px rgba(255, 0, 255, 0.5),
+                inset 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .tema-titulo h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 
+                0 0 10px #0ff,
+                0 0 20px #0ff,
+                0 0 30px #0ff;
+        }
+
+        .tema-titulo p {
+            font-size: 1.1em;
+            color: #f0f;
+            text-shadow: 0 0 10px #f0f;
+        }
+
+        .section {
+            background: rgba(10, 10, 20, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            box-shadow: 
+                0 0 15px rgba(0, 255, 255, 0.3),
+                inset 0 0 30px rgba(255, 0, 255, 0.1);
+        }
+
+        .section h3 {
+            color: #0ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f0f;
+            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+            letter-spacing: 2px;
+        }
+
+        .code-container {
+            background: #000;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-top: 15px;
+            border: 2px solid #0ff;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.4),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        .code-container pre {
+            margin: 0;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            text-shadow: 0 0 5px #0f0;
+        }
+
+        .keyword { 
+            color: #f0f; 
+            text-shadow: 0 0 5px #f0f;
+        }
+        .function { 
+            color: #0ff; 
+            text-shadow: 0 0 5px #0ff;
+        }
+        .string { 
+            color: #ff0; 
+            text-shadow: 0 0 5px #ff0;
+        }
+        .comment { 
+            color: #888; 
+        }
+        .number { 
+            color: #f0f; 
+            text-shadow: 0 0 5px #f0f;
+        }
+
+        .glosario-item {
+            background: rgba(0, 20, 30, 0.8);
+            border-left: 4px solid #0ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .glosario-item:hover {
+            transform: translateX(10px);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 40px rgba(255, 0, 255, 0.4);
+            border-left-color: #f0f;
+            animation: glitch 0.3s ease;
+        }
+
+        .glosario-item h4 {
+            color: #0ff;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            text-shadow: 0 0 10px #0ff;
+        }
+
+        .glosario-item p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .parametros {
+            background: rgba(0, 10, 20, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+        }
+
+        .parametros strong {
+            color: #f0f;
+            display: block;
+            margin-bottom: 8px;
+            text-shadow: 0 0 5px #f0f;
+        }
+
+        .parametros code {
+            background: #000;
+            color: #0ff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            border: 1px solid #0ff;
+            text-shadow: 0 0 5px #0ff;
+        }
+
+        @media (max-width: 768px) {
+            .floating-l {
+                font-size: 8em;
+                top: 5%;
+                right: 5%;
+            }
+
+            .content-wrapper {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .tema-titulo h2 {
+                font-size: 1.5em;
+            }
+
+            .section h3 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-l">L</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>GUZMAN LOPEZ NAYVER DAVIS</h1>
+            <p>Especialidad de IA del CBTIS 144</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="tema-titulo">
+                <h2>Tema 1: Funciones en Python</h2>
+                <p>Creación y uso de funciones personalizadas</p>
+            </div>
+
+            <div class="section">
+                <h3>📝 Código del Ejemplo</h3>
+                <div class="code-container">
+                    <pre>
+import random
+saludos=["hola","quetal","buen dia","que onda","hello"]
+respuesta=["hola, como estas ",
+            "como puedo ayudar",
+            "hola como te va",
+            "que hay ",
+
+]
+
+despedida=["adios","bye","nos vemos","hasta luego " ]
+respuesta_despedida=[
+    "adios",
+    "bye",
+    "nos vemos",
+    "hasta luego ",
+
+]
+
+preguntas=["como estas","que tal hoy","que me cuentas","hay que onda"]
+respuesta_preguntas=[
+    "estoy muy bien hoy",
+    "estoy triste",
+    "me encuentro bien",
+    "todo al cien",
+    "eehh normal"
+]
+
+tu_nombre=["como te llamas","di tu nombre","dime tu nombre","tienes nombre"]
+respuesta_nombre=[
+    "paco",
+    "azul_y_yael",
+    "chat bot",
+    "mis amigos me dicen juancho"
+
+]
+
+print("hola soy chato el chat bot de confianza "
+      "si deseas terminar escribe 'salir '")
+while True:
+    usuario=input("tu: ").lower().strip()
+    if usuario in saludos:
+        print("chatbot",random.choice(respuesta))
+    elif usuario in preguntas:
+        print("chatbot",random.choice(respuesta_preguntas))
+    elif usuario in tu_nombre:
+        print("chatbot",random.choice(respuesta_nombre))
+    elif usuario in despedida:
+        print("chatbot",random.choice(respuesta_despedida))
+        break
+                    </pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📚 Glosario de Funciones</h3>
+
+                <div class="glosario-item">
+                    <h4>import random</h4>
+                    <p>Importa el módulo random que permite generar valores aleatorios. Se usa para seleccionar respuestas al azar del chatbot.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>random.choice()</h4>
+                    <p>Función que selecciona un elemento aleatorio de una lista. En este código se usa para que el chatbot dé respuestas variadas.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>lista</code> - La lista de la cual se seleccionará un elemento al azar
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>input()</h4>
+                    <p>Función que permite al usuario ingresar texto desde el teclado. Captura lo que el usuario escribe.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>prompt</code> - Mensaje que se muestra al usuario (ej: "tu: ")
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>.lower()</h4>
+                    <p>Método que convierte todo el texto a minúsculas. Permite que el chatbot entienda "HOLA" igual que "hola".</p>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>.strip()</h4>
+                    <p>Método que elimina espacios en blanco al inicio y final del texto. Limpia la entrada del usuario.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>print()</h4>
+                    <p>Función que muestra texto en la pantalla. Se usa para que el chatbot muestre sus respuestas.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>*args</code> - Uno o más valores a mostrar en pantalla
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>while True:</h4>
+                    <p>Bucle infinito que se ejecuta continuamente hasta encontrar un break. Mantiene la conversación activa.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>if / elif / else</h4>
+                    <p>Estructuras condicionales que evalúan condiciones. Permiten al chatbot responder según lo que el usuario escriba.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>in</h4>
+                    <p>Operador que verifica si un valor está dentro de una lista. Comprueba si el mensaje del usuario coincide con opciones predefinidas.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>break</h4>
+                    <p>Instrucción que termina un bucle. Se usa para salir de la conversación cuando el usuario se despide.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <h4>Listas [ ]</h4>
+                    <p>Estructura de datos que almacena múltiples valores. En el código se usan para guardar saludos, preguntas, respuestas, etc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
