@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema con Código y Glosario - Neón Claro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-40px) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(-5deg); }
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { 
+                text-shadow: 0 0 15px #0099ff, 0 0 30px #0099ff, 0 0 45px #0099ff;
+            }
+            50% { 
+                text-shadow: 0 0 25px #0099ff, 0 0 40px #0099ff, 0 0 60px #0099ff, 0 0 80px #0099ff;
+            }
+        }
+
+        @keyframes neonBorder {
+            0%, 100% { 
+                box-shadow: 0 0 20px #0099ff, 0 0 40px #0099ff, 0 0 60px rgba(0, 153, 255, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 30px #0099ff, 0 0 60px #0099ff, 0 0 90px rgba(0, 153, 255, 0.7);
+            }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        body {
+            font-family: 'Orbitron', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0f7ff 0%, #ffe0ff 50%, #e0ffff 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, rgba(0, 150, 255, 0.1) 0px, transparent 2px, transparent 4px, rgba(0, 150, 255, 0.1) 6px),
+                repeating-linear-gradient(90deg, rgba(255, 0, 200, 0.1) 0px, transparent 2px, transparent 4px, rgba(255, 0, 200, 0.1) 6px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-l {
+            position: fixed;
+            top: 15%;
+            right: 10%;
+            font-size: 15em;
+            font-weight: bold;
+            color: transparent;
+            background: linear-gradient(45deg, #0099ff, #ff00aa, #00ffff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            text-shadow: 
+                0 0 30px rgba(0, 153, 255, 0.8),
+                0 0 50px rgba(255, 0, 170, 0.6),
+                0 0 70px rgba(0, 255, 255, 0.4);
+            animation: float 6s ease-in-out infinite, neonPulse 2s ease-in-out infinite;
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            color: #0066cc;
+            margin-bottom: 50px;
+            animation: neonPulse 3s ease-in-out infinite;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 
+                0 0 15px #0099ff,
+                0 0 30px #0099ff,
+                0 0 45px #0099ff;
+            letter-spacing: 3px;
+            color: #0066cc;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #cc0088;
+            text-shadow: 
+                0 0 15px #ff00aa,
+                0 0 30px #ff00aa;
+        }
+
+        .content-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            border: 3px solid #0099ff;
+            box-shadow: 
+                0 0 30px rgba(0, 153, 255, 0.6),
+                0 0 50px rgba(255, 0, 170, 0.4),
+                inset 0 0 80px rgba(0, 153, 255, 0.1);
+            animation: neonBorder 3s ease-in-out infinite;
+        }
+
+        .tema-titulo {
+            background: linear-gradient(135deg, rgba(0, 200, 255, 0.15) 0%, rgba(255, 0, 200, 0.15) 100%);
+            color: #0066cc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 3px solid #ff00aa;
+            box-shadow: 
+                0 0 30px rgba(255, 0, 170, 0.5),
+                inset 0 0 40px rgba(0, 153, 255, 0.2);
+        }
+
+        .tema-titulo h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 
+                0 0 15px #0099ff,
+                0 0 30px #0099ff;
+            color: #0066cc;
+        }
+
+        .tema-titulo p {
+            font-size: 1.1em;
+            color: #cc0088;
+            text-shadow: 0 0 15px #ff00aa;
+        }
+
+        .section {
+            background: rgba(240, 250, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(0, 153, 255, 0.6);
+            box-shadow: 
+                0 0 20px rgba(0, 153, 255, 0.4),
+                inset 0 0 40px rgba(255, 0, 170, 0.1);
+        }
+
+        .section h3 {
+            color: #0066cc;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff00aa;
+            text-shadow: 0 0 15px #0099ff, 0 0 25px #0099ff;
+            letter-spacing: 2px;
+        }
+
+        .code-container {
+            background: rgba(20, 20, 40, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-top: 15px;
+            border: 3px solid #0099ff;
+            box-shadow: 
+                0 0 30px rgba(0, 153, 255, 0.6),
+                inset 0 0 30px rgba(0, 153, 255, 0.2);
+        }
+
+        .code-container pre {
+            margin: 0;
+            color: #00ff88;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            text-shadow: 0 0 8px #00ff88;
+        }
+
+        .keyword { 
+            color: #ff00aa; 
+            text-shadow: 0 0 8px #ff00aa;
+        }
+        .function { 
+            color: #00ccff; 
+            text-shadow: 0 0 8px #00ccff;
+        }
+        .string { 
+            color: #ffdd00; 
+            text-shadow: 0 0 8px #ffdd00;
+        }
+        .comment { 
+            color: #888; 
+        }
+        .number { 
+            color: #ff00aa; 
+            text-shadow: 0 0 8px #ff00aa;
+        }
+
+        .glosario-item {
+            background: rgba(240, 250, 255, 0.95);
+            border-left: 5px solid #0099ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(0, 153, 255, 0.4);
+        }
+
+        .glosario-item:hover {
+            transform: translateX(10px);
+            box-shadow: 
+                0 0 30px rgba(0, 153, 255, 0.7),
+                0 0 50px rgba(255, 0, 170, 0.5);
+            border-left-color: #ff00aa;
+            animation: glitch 0.3s ease;
+            background: rgba(230, 245, 255, 1);
+        }
+
+        .glosario-item h4 {
+            color: #0066cc;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            text-shadow: 0 0 15px #0099ff;
+        }
+
+        .glosario-item p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .categoria {
+            display: inline-block;
+            background: linear-gradient(135deg, #0099ff, #ff00aa);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px rgba(0, 153, 255, 0.6);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .parametros {
+            background: rgba(230, 245, 255, 0.95);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border: 2px solid rgba(255, 0, 170, 0.4);
+        }
+
+        .parametros strong {
+            color: #cc0088;
+            display: block;
+            margin-bottom: 8px;
+            text-shadow: 0 0 8px #ff00aa;
+        }
+
+        .parametros code {
+            background: rgba(0, 100, 200, 0.15);
+            color: #0066cc;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            border: 2px solid #0099ff;
+            text-shadow: 0 0 5px #0099ff;
+            font-weight: bold;
+        }
+
+        .ejemplo {
+            background: rgba(20, 20, 40, 0.95);
+            color: #00ff88;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            border: 2px solid #0099ff;
+            box-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
+            text-shadow: 0 0 5px #00ff88;
+        }
+
+        @media (max-width: 768px) {
+            .floating-l {
+                font-size: 8em;
+                top: 5%;
+                right: 5%;
+            }
+
+            .content-wrapper {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .tema-titulo h2 {
+                font-size: 1.5em;
+            }
+
+            .section h3 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-l">L</div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>GUZMAN LOPEZ NAYVER DAVIS</h1>
+            <p>Especialidad de IA del CBTIS 144</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="tema-titulo">
+                <h2>chatbot_sentimientos</h2>
+                <p>Creación y uso de funciones personalizadas</p>
+            </div>
+
+            <div class="section">
+                <h3>📝 Código del Ejemplo</h3>
+                <div class="code-container">
+                    <pre>from textblob import TextBlob
+import random
+from deep_translator import GoogleTranslator
+
+usuario=["hola",
+         "hola chat"]
+
+preguntas=["¿como te sientes hoy?",
+           "¿que tal estas hoy?",
+           "¿como va tu dia hoy?"
+           ]
+respuestas=["me siento triste",
+            "estoy muy feliz",
+            "estoy enojado",
+            "estoy disjustado",
+            "estoy con animo"
+            ""]
+positivo=["me alegra que te sientas feliz hoy",
+          "ten un excelente dia"]
+negativo=["lamento que estes de ese estado de animos pero relajate ",
+          "lamento mucho lo que sientes mis mejores deseos"]
+neutro=["okey escelente",
+        "bien echale ganas"]
+while True:
+    texto = input("Ingresa una texto: ")
+    ingles = GoogleTranslator(source='es', target='en').translate(texto)
+    analizar = TextBlob(ingles)
+    sentimiento = analizar.sentiment.polarity
+
+    if texto in usuario:
+        print("Chatbot: ",random.choice(preguntas))
+    if texto in respuestas:
+        if sentimiento >= 0.5:
+            print(random.choice(positivo))
+        if sentimiento ==0:
+            print(random.choice(neutro))
+        if sentimiento <0:
+            print(random.choice(negativo))</pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📚 Glosario de Funciones</h3>
+
+                <div class="glosario-item">
+                    <span class="categoria">IMPORTACIÓN</span>
+                    <h4>from textblob import TextBlob</h4>
+                    <p>Importa la clase TextBlob de la librería textblob, que permite realizar análisis de sentimientos y procesamiento de lenguaje natural en textos.</p>
+                    <div class="parametros">
+                        <strong>Uso principal:</strong>
+                        Analizar la polaridad emocional de un texto (positivo, negativo o neutral)
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">IMPORTACIÓN</span>
+                    <h4>import random</h4>
+                    <p>Importa el módulo random que permite generar valores aleatorios. Se usa para seleccionar respuestas variadas del chatbot.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">IMPORTACIÓN</span>
+                    <h4>from deep_translator import GoogleTranslator</h4>
+                    <p>Importa la clase GoogleTranslator de la librería deep_translator para traducir textos entre diferentes idiomas usando el traductor de Google.</p>
+                    <div class="parametros">
+                        <strong>Uso en el código:</strong>
+                        Traduce el texto del español al inglés para que TextBlob pueda analizarlo correctamente
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">FUNCIÓN</span>
+                    <h4>random.choice()</h4>
+                    <p>Función que selecciona un elemento aleatorio de una lista. En este código se usa para que el chatbot dé respuestas variadas según el sentimiento detectado.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>lista</code> - La lista de la cual se seleccionará un elemento al azar
+                    </div>
+                    <div class="ejemplo">random.choice(positivo)  # Selecciona una respuesta positiva al azar</div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">FUNCIÓN</span>
+                    <h4>input()</h4>
+                    <p>Función que permite al usuario ingresar texto desde el teclado. Captura lo que el usuario escribe para analizarlo.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>prompt</code> - Mensaje que se muestra al usuario (ej: "Ingresa una texto: ")
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">MÉTODO</span>
+                    <h4>GoogleTranslator(source, target).translate()</h4>
+                    <p>Método que traduce un texto del idioma origen al idioma destino usando la API de Google Translate.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>source</code> - Idioma de origen (ej: 'es' para español)<br>
+                        <code>target</code> - Idioma destino (ej: 'en' para inglés)<br>
+                        <code>texto</code> - El texto a traducir
+                    </div>
+                    <div class="ejemplo">GoogleTranslator(source='es', target='en').translate("Hola")
+# Resultado: "Hello"</div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">CLASE</span>
+                    <h4>TextBlob()</h4>
+                    <p>Clase que crea un objeto de análisis de texto. Permite realizar operaciones de procesamiento de lenguaje natural como análisis de sentimientos.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>texto</code> - El texto a analizar (preferiblemente en inglés)
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">PROPIEDAD</span>
+                    <h4>.sentiment.polarity</h4>
+                    <p>Propiedad que devuelve un valor numérico entre -1 y 1 que representa la polaridad emocional del texto.</p>
+                    <div class="parametros">
+                        <strong>Valores de retorno:</strong>
+                        <code>-1.0 a -0.1</code> - Sentimiento negativo<br>
+                        <code>0.0</code> - Sentimiento neutral<br>
+                        <code>0.1 a 1.0</code> - Sentimiento positivo
+                    </div>
+                    <div class="ejemplo">analizar = TextBlob("I am very happy")
+sentimiento = analizar.sentiment.polarity  # Resultado: ~0.8 (positivo)</div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">FUNCIÓN</span>
+                    <h4>print()</h4>
+                    <p>Función que muestra texto en la pantalla. Se usa para que el chatbot muestre sus respuestas según el análisis de sentimiento.</p>
+                    <div class="parametros">
+                        <strong>Parámetros:</strong>
+                        <code>*args</code> - Uno o más valores a mostrar en pantalla
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">ESTRUCTURA</span>
+                    <h4>while True:</h4>
+                    <p>Bucle infinito que se ejecuta continuamente hasta encontrar un break. Mantiene la conversación del chatbot activa constantemente.</p>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">CONDICIONAL</span>
+                    <h4>if / elif / else</h4>
+                    <p>Estructuras condicionales que evalúan condiciones. Permiten al chatbot responder de manera diferente según el sentimiento detectado (positivo, negativo o neutral).</p>
+                    <div class="ejemplo">if sentimiento >= 0.5:  # Si es muy positivo
+    print(random.choice(positivo))
+if sentimiento < 0:  # Si es negativo
+    print(random.choice(negativo))</div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">OPERADOR</span>
+                    <h4>in</h4>
+                    <p>Operador que verifica si un valor está contenido dentro de una lista. Comprueba si el mensaje del usuario coincide con saludos o respuestas predefinidas.</p>
+                    <div class="ejemplo">if texto in usuario:  # Verifica si el texto está en la lista de saludos</div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">OPERADORES COMPARACIÓN</span>
+                    <h4>>=, ==, <</h4>
+                    <p>Operadores de comparación que evalúan la polaridad del sentimiento:</p>
+                    <div class="parametros">
+                        <code>>=</code> - Mayor o igual (sentimiento >= 0.5 para muy positivo)<br>
+                        <code>==</code> - Igual a (sentimiento == 0 para neutral)<br>
+                        <code><</code> - Menor que (sentimiento < 0 para negativo)
+                    </div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">ESTRUCTURA DE DATOS</span>
+                    <h4>Listas [ ]</h4>
+                    <p>Estructura de datos que almacena múltiples valores. En el código se usan para guardar saludos, preguntas, respuestas y diferentes tipos de mensajes según el sentimiento.</p>
+                    <div class="ejemplo">usuario = ["hola", "hola chat"]
+positivo = ["me alegra que te sientas feliz hoy", "ten un excelente dia"]
+negativo = ["lamento que estes de ese estado de animos..."]
+neutro = ["okey escelente", "bien echale ganas"]</div>
+                </div>
+
+                <div class="glosario-item">
+                    <span class="categoria">CONCEPTO</span>
+                    <h4>Análisis de Sentimientos</h4>
+                    <p>Técnica de procesamiento de lenguaje natural que identifica y extrae información emocional de un texto. El código usa esta técnica para clasificar mensajes como positivos, negativos o neutrales y responder apropiadamente.</p>
+                    <div class="parametros">
+                        <strong>Proceso en el código:</strong>
+                        1. Usuario ingresa texto en español<br>
+                        2. Se traduce al inglés<br>
+                        3. TextBlob analiza la polaridad<br>
+                        4. Se clasifica el sentimiento<br>
+                        5. Se responde según la clasificación
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
