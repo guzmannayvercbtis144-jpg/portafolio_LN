@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbots PNL - Catálogo de Librerías</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff1744 0%, #ff4569 50%, #ff758f 100%);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #c2185b 0%, #ff1744 30%, #ff4569 70%, #ff758f 100%);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            color: #ffffff;
+            text-align: center;
+            z-index: 10;
+            text-shadow: 
+                3px 3px 0px #ff1744,
+                -3px -3px 0px #c2185b,
+                0 0 30px rgba(255, 255, 255, 0.5);
+            animation: fadeInUp 1s ease;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animated Superman symbols */
+        .superman-symbol {
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.15;
+            animation: float 8s ease-in-out infinite;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .symbol1 {
+            top: 15%;
+            left: 10%;
+            font-size: 5rem;
+            animation-delay: 0s;
+        }
+
+        .symbol2 {
+            top: 60%;
+            right: 12%;
+            font-size: 4.5rem;
+            animation-delay: 1.5s;
+        }
+
+        .symbol3 {
+            bottom: 20%;
+            left: 15%;
+            font-size: 3.5rem;
+            animation-delay: 3s;
+        }
+
+        .symbol4 {
+            top: 35%;
+            right: 20%;
+            font-size: 6rem;
+            animation-delay: 2s;
+        }
+
+        .symbol5 {
+            top: 70%;
+            left: 40%;
+            font-size: 4rem;
+            animation-delay: 4s;
+        }
+
+        /* Diamond shapes */
+        .diamond {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            transform: rotate(45deg);
+            opacity: 0.1;
+            animation: rotate 10s linear infinite;
+        }
+
+        .diamond1 {
+            top: 20%;
+            right: 25%;
+            animation-delay: 0s;
+        }
+
+        .diamond2 {
+            bottom: 25%;
+            right: 35%;
+            width: 100px;
+            height: 100px;
+            animation-delay: 2s;
+        }
+
+        .diamond3 {
+            top: 50%;
+            left: 25%;
+            width: 120px;
+            height: 120px;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-30px) rotate(10deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(20px) rotate(-10deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-15px) rotate(5deg) scale(1.05);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(45deg);
+            }
+            100% {
+                transform: rotate(405deg);
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 80px;
+        }
+
+        .category-title {
+            font-size: 3rem;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 
+                2px 2px 0px #ff1744,
+                -2px -2px 0px #c2185b,
+                0 0 20px rgba(255, 255, 255, 0.5);
+            font-weight: 900;
+        }
+
+        /* Cards Grid - VERTICAL LAYOUT */
+        .cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .library-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%);
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .library-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff1744 0%, #ff4569 50%, #ff758f 100%);
+        }
+
+        .library-card:hover {
+            transform: translateX(10px);
+            box-shadow: 
+                0 15px 40px rgba(255, 23, 68, 0.4),
+                0 0 30px rgba(255, 69, 105, 0.3);
+            border-color: #ff4569;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .library-icon {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            flex-shrink: 0;
+        }
+
+        .library-name {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #c2185b;
+            text-shadow: 1px 1px 2px rgba(255, 23, 68, 0.3);
+        }
+
+        .library-description {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .installation-section {
+            background: linear-gradient(145deg, #fff5f7, #ffe0e6);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid #ff1744;
+        }
+
+        .installation-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #c2185b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .installation-title::before {
+            content: '📦';
+            font-size: 1.5rem;
+        }
+
+        .command-box {
+            background: #2d1b2e;
+            color: #ff6b9d;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            position: relative;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #ff1744;
+        }
+
+        .command-box::before {
+            content: '
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                padding: 0 20px;
+            }
+
+            .category-title {
+                font-size: 2rem;
+            }
+
+            .library-name {
+                font-size: 1.5rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .strawberry {
+                font-size: 3rem;
+            }
+
+            .command-box {
+                font-size: 0.85rem;
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Floating Strawberries -->
+        <div class="strawberry strawberry1">🍓</div>
+        <div class="strawberry strawberry2">🍓</div>
+        <div class="strawberry strawberry3">🍓</div>
+        <div class="strawberry strawberry4">🍓</div>
+        <div class="strawberry strawberry5">🍓</div>
+        
+        <!-- Strawberry shapes -->
+        <div class="strawberry-shape shape1"></div>
+        <div class="strawberry-shape shape2"></div>
+        <div class="strawberry-shape shape3"></div>
+        
+        <h1>Chatbots PNL</h1>
+    </section>
+
+    <div class="container">
+        <!-- Chatbot con PNL -->
+        <section class="category-section">
+            <h2 class="category-title">🤖 Chatbot con PNL</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">📝</div>
+                        <h3 class="library-name">NLTK</h3>
+                    </div>
+                    <p class="library-description">Natural Language Toolkit para procesamiento de texto, tokenización y análisis lingüístico básico. Incluye corpus lingüísticos y herramientas para clasificación, stemming y parsing.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install nltk</div>
+                        <p class="installation-note">Después de instalar, ejecuta: <strong>import nltk; nltk.download('popular')</strong> para descargar datos necesarios.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">⚡</div>
+                        <h3 class="library-name">spaCy</h3>
+                    </div>
+                    <p class="library-description">Librería de PNL industrial rápida y eficiente para análisis sintáctico y reconocimiento de entidades. Optimizada para producción con modelos pre-entrenados en múltiples idiomas.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install spacy</div>
+                        <div class="command-box">python -m spacy download es_core_news_sm</div>
+                        <p class="installation-note">El segundo comando descarga el modelo en español. Para inglés usa: <strong>en_core_web_sm</strong></p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💭</div>
+                        <h3 class="library-name">TextBlob</h3>
+                    </div>
+                    <p class="library-description">API simple para análisis de sentimientos, clasificación de texto y traducción automática. Ideal para principiantes con interfaz intuitiva y documentación clara.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install textblob</div>
+                        <div class="command-box">python -m textblob.download_corpora</div>
+                        <p class="installation-note">El segundo comando descarga los corpus necesarios para el análisis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot con IA -->
+        <section class="category-section">
+            <h2 class="category-title">🧠 Chatbot con IA</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🔥</div>
+                        <h3 class="library-name">TensorFlow</h3>
+                    </div>
+                    <p class="library-description">Framework de machine learning para crear modelos de redes neuronales y deep learning avanzados. Desarrollado por Google, soporta entrenamiento distribuido y despliegue en múltiples plataformas.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install tensorflow</div>
+                        <p class="installation-note">Para GPU: <strong>pip install tensorflow-gpu</strong> (requiere CUDA instalado)</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🎯</div>
+                        <h3 class="library-name">PyTorch</h3>
+                    </div>
+                    <p class="library-description">Plataforma flexible de aprendizaje profundo con computación dinámica para investigación y producción. Preferida en investigación académica por su facilidad de uso y debugging.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install torch torchvision torchaudio</div>
+                        <p class="installation-note">Visita <strong>pytorch.org</strong> para comando específico según tu sistema y CUDA.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🤗</div>
+                        <h3 class="library-name">Transformers</h3>
+                    </div>
+                    <p class="library-description">Modelos pre-entrenados de Hugging Face como GPT, BERT para generación y comprensión de lenguaje. Acceso a miles de modelos estado del arte con pocas líneas de código.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install transformers</div>
+                        <div class="command-box">pip install accelerate</div>
+                        <p class="installation-note">Accelerate mejora el rendimiento. También instala PyTorch o TensorFlow.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🎨</div>
+                        <h3 class="library-name">Rasa</h3>
+                    </div>
+                    <p class="library-description">Framework completo para construir asistentes conversacionales con machine learning contextual. Incluye NLU, gestión de diálogos y integración con múltiples canales.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install rasa</div>
+                        <div class="command-box">rasa init</div>
+                        <p class="installation-note">El comando <strong>init</strong> crea un proyecto ejemplo para comenzar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot conectado a plataformas -->
+        <section class="category-section">
+            <h2 class="category-title">🔗 Chatbot Conectado a Plataformas</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💬</div>
+                        <h3 class="library-name">Python-Telegram-Bot</h3>
+                    </div>
+                    <p class="library-description">Wrapper de la API de Telegram para crear bots interactivos con comandos y mensajes. Soporta keyboards inline, callbacks y manejo de archivos multimedia.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install python-telegram-bot</div>
+                        <p class="installation-note">Necesitas crear un bot con <strong>@BotFather</strong> en Telegram para obtener el token.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">📱</div>
+                        <h3 class="library-name">Twilio</h3>
+                    </div>
+                    <p class="library-description">API para integración con WhatsApp, SMS y llamadas telefónicas programáticas. Servicio empresarial con alta confiabilidad y entrega garantizada.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install twilio</div>
+                        <p class="installation-note">Requiere cuenta en <strong>twilio.com</strong> y configuración de credenciales API.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💼</div>
+                        <h3 class="library-name">Slack SDK</h3>
+                    </div>
+                    <p class="library-description">Herramientas para crear bots empresariales integrados con canales y eventos de Slack. Soporta comandos slash, modales interactivos y flujos de trabajo automatizados.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install slack-sdk</div>
+                        <div class="command-box">pip install slack-bolt</div>
+                        <p class="installation-note">Slack Bolt simplifica la creación de apps. Necesitas crear una app en <strong>api.slack.com</strong></p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">👥</div>
+                        <h3 class="library-name">Facebook Messenger</h3>
+                    </div>
+                    <p class="library-description">Bot Framework para desarrollar chatbots en Messenger con plantillas y respuestas rápidas. Integración con millones de usuarios a través de páginas de Facebook.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install pymessenger</div>
+                        <div class="command-box">pip install flask</div>
+                        <p class="installation-note">Necesitas una página de Facebook y configurar webhook. Flask es para el servidor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot en páginas web -->
+        <section class="category-section">
+            <h2 class="category-title">🌐 Chatbot en Páginas Web</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🌶️</div>
+                        <h3 class="library-name">Flask</h3>
+                    </div>
+                    <p class="library-description">Micro-framework web ligero para crear APIs REST y backends de chatbots rápidamente. Minimalista y flexible, ideal para proyectos pequeños y medianos.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install flask</div>
+                        <div class="command-box">pip install flask-cors</div>
+                        <p class="installation-note">Flask-CORS permite peticiones desde otros dominios. Útil para APIs públicas.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">⚡</div>
+                        <h3 class="library-name">FastAPI</h3>
+                    </div>
+                    <p class="library-description">Framework moderno y rápido para APIs asíncronas con documentación automática integrada. Alto rendimiento comparable a Node.js y Go, con validación de tipos automática.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install fastapi</div>
+                        <div class="command-box">pip install uvicorn[standard]</div>
+                        <p class="installation-note">Uvicorn es el servidor ASGI necesario para ejecutar FastAPI en producción.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🎸</div>
+                        <h3 class="library-name">Django</h3>
+                    </div>
+                    <p class="library-description">Framework web robusto para aplicaciones complejas con ORM, autenticación y administración. Incluye baterías incluidas: panel admin, ORM, seguridad y migraciones.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install django</div>
+                        <div class="command-box">django-admin startproject myproject</div>
+                        <p class="installation-note">El segundo comando crea un nuevo proyecto Django con estructura completa.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💬</div>
+                        <h3 class="library-name">ChatterBot</h3>
+                    </div>
+                    <p class="library-description">Librería conversacional con machine learning que aprende de interacciones previas. Genera respuestas basadas en colecciones de declaraciones conocidas.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install chatterbot</div>
+                        <div class="command-box">pip install chatterbot-corpus</div>
+                        <p class="installation-note">ChatterBot-corpus incluye datos de entrenamiento en múltiples idiomas.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🔌</div>
+                        <h3 class="library-name">Socket.IO</h3>
+                    </div>
+                    <p class="library-description">Comunicación en tiempo real bidireccional entre cliente y servidor para chats instantáneos. Fallback automático a long-polling si WebSockets no está disponible.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install python-socketio</div>
+                        <div class="command-box">pip install aiohttp</div>
+                        <p class="installation-note">Aiohttp es necesario para el servidor asíncrono. También instala cliente JavaScript.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>;
+            color: #ff4569;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .installation-note {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-left: 10px;
+            border-left: 3px solid #ff4569;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                padding: 0 20px;
+            }
+
+            .category-title {
+                font-size: 2rem;
+            }
+
+            .library-name {
+                font-size: 1.5rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .superman-symbol {
+                font-size: 3rem;
+            }
+
+            .command-box {
+                font-size: 0.85rem;
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Superman Symbols -->
+        <div class="superman-symbol symbol1">S</div>
+        <div class="superman-symbol symbol2">S</div>
+        <div class="superman-symbol symbol3">S</div>
+        <div class="superman-symbol symbol4">S</div>
+        <div class="superman-symbol symbol5">S</div>
+        
+        <!-- Diamond shapes -->
+        <div class="diamond diamond1"></div>
+        <div class="diamond diamond2"></div>
+        <div class="diamond diamond3"></div>
+        
+        <h1>Chatbots PNL</h1>
+    </section>
+
+    <div class="container">
+        <!-- Chatbot con PNL -->
+        <section class="category-section">
+            <h2 class="category-title">🤖 Chatbot con PNL</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">📝</div>
+                        <h3 class="library-name">NLTK</h3>
+                    </div>
+                    <p class="library-description">Natural Language Toolkit para procesamiento de texto, tokenización y análisis lingüístico básico. Incluye corpus lingüísticos y herramientas para clasificación, stemming y parsing.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install nltk</div>
+                        <p class="installation-note">Después de instalar, ejecuta: <strong>import nltk; nltk.download('popular')</strong> para descargar datos necesarios.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">⚡</div>
+                        <h3 class="library-name">spaCy</h3>
+                    </div>
+                    <p class="library-description">Librería de PNL industrial rápida y eficiente para análisis sintáctico y reconocimiento de entidades. Optimizada para producción con modelos pre-entrenados en múltiples idiomas.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install spacy</div>
+                        <div class="command-box">python -m spacy download es_core_news_sm</div>
+                        <p class="installation-note">El segundo comando descarga el modelo en español. Para inglés usa: <strong>en_core_web_sm</strong></p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💭</div>
+                        <h3 class="library-name">TextBlob</h3>
+                    </div>
+                    <p class="library-description">API simple para análisis de sentimientos, clasificación de texto y traducción automática. Ideal para principiantes con interfaz intuitiva y documentación clara.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install textblob</div>
+                        <div class="command-box">python -m textblob.download_corpora</div>
+                        <p class="installation-note">El segundo comando descarga los corpus necesarios para el análisis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot con IA -->
+        <section class="category-section">
+            <h2 class="category-title">🧠 Chatbot con IA</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🔥</div>
+                        <h3 class="library-name">TensorFlow</h3>
+                    </div>
+                    <p class="library-description">Framework de machine learning para crear modelos de redes neuronales y deep learning avanzados. Desarrollado por Google, soporta entrenamiento distribuido y despliegue en múltiples plataformas.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install tensorflow</div>
+                        <p class="installation-note">Para GPU: <strong>pip install tensorflow-gpu</strong> (requiere CUDA instalado)</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🎯</div>
+                        <h3 class="library-name">PyTorch</h3>
+                    </div>
+                    <p class="library-description">Plataforma flexible de aprendizaje profundo con computación dinámica para investigación y producción. Preferida en investigación académica por su facilidad de uso y debugging.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install torch torchvision torchaudio</div>
+                        <p class="installation-note">Visita <strong>pytorch.org</strong> para comando específico según tu sistema y CUDA.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🤗</div>
+                        <h3 class="library-name">Transformers</h3>
+                    </div>
+                    <p class="library-description">Modelos pre-entrenados de Hugging Face como GPT, BERT para generación y comprensión de lenguaje. Acceso a miles de modelos estado del arte con pocas líneas de código.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install transformers</div>
+                        <div class="command-box">pip install accelerate</div>
+                        <p class="installation-note">Accelerate mejora el rendimiento. También instala PyTorch o TensorFlow.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🎨</div>
+                        <h3 class="library-name">Rasa</h3>
+                    </div>
+                    <p class="library-description">Framework completo para construir asistentes conversacionales con machine learning contextual. Incluye NLU, gestión de diálogos y integración con múltiples canales.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install rasa</div>
+                        <div class="command-box">rasa init</div>
+                        <p class="installation-note">El comando <strong>init</strong> crea un proyecto ejemplo para comenzar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot conectado a plataformas -->
+        <section class="category-section">
+            <h2 class="category-title">🔗 Chatbot Conectado a Plataformas</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💬</div>
+                        <h3 class="library-name">Python-Telegram-Bot</h3>
+                    </div>
+                    <p class="library-description">Wrapper de la API de Telegram para crear bots interactivos con comandos y mensajes. Soporta keyboards inline, callbacks y manejo de archivos multimedia.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install python-telegram-bot</div>
+                        <p class="installation-note">Necesitas crear un bot con <strong>@BotFather</strong> en Telegram para obtener el token.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">📱</div>
+                        <h3 class="library-name">Twilio</h3>
+                    </div>
+                    <p class="library-description">API para integración con WhatsApp, SMS y llamadas telefónicas programáticas. Servicio empresarial con alta confiabilidad y entrega garantizada.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install twilio</div>
+                        <p class="installation-note">Requiere cuenta en <strong>twilio.com</strong> y configuración de credenciales API.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💼</div>
+                        <h3 class="library-name">Slack SDK</h3>
+                    </div>
+                    <p class="library-description">Herramientas para crear bots empresariales integrados con canales y eventos de Slack. Soporta comandos slash, modales interactivos y flujos de trabajo automatizados.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install slack-sdk</div>
+                        <div class="command-box">pip install slack-bolt</div>
+                        <p class="installation-note">Slack Bolt simplifica la creación de apps. Necesitas crear una app en <strong>api.slack.com</strong></p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">👥</div>
+                        <h3 class="library-name">Facebook Messenger</h3>
+                    </div>
+                    <p class="library-description">Bot Framework para desarrollar chatbots en Messenger con plantillas y respuestas rápidas. Integración con millones de usuarios a través de páginas de Facebook.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install pymessenger</div>
+                        <div class="command-box">pip install flask</div>
+                        <p class="installation-note">Necesitas una página de Facebook y configurar webhook. Flask es para el servidor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot en páginas web -->
+        <section class="category-section">
+            <h2 class="category-title">🌐 Chatbot en Páginas Web</h2>
+            <div class="cards-grid">
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🌶️</div>
+                        <h3 class="library-name">Flask</h3>
+                    </div>
+                    <p class="library-description">Micro-framework web ligero para crear APIs REST y backends de chatbots rápidamente. Minimalista y flexible, ideal para proyectos pequeños y medianos.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install flask</div>
+                        <div class="command-box">pip install flask-cors</div>
+                        <p class="installation-note">Flask-CORS permite peticiones desde otros dominios. Útil para APIs públicas.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">⚡</div>
+                        <h3 class="library-name">FastAPI</h3>
+                    </div>
+                    <p class="library-description">Framework moderno y rápido para APIs asíncronas con documentación automática integrada. Alto rendimiento comparable a Node.js y Go, con validación de tipos automática.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install fastapi</div>
+                        <div class="command-box">pip install uvicorn[standard]</div>
+                        <p class="installation-note">Uvicorn es el servidor ASGI necesario para ejecutar FastAPI en producción.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🎸</div>
+                        <h3 class="library-name">Django</h3>
+                    </div>
+                    <p class="library-description">Framework web robusto para aplicaciones complejas con ORM, autenticación y administración. Incluye baterías incluidas: panel admin, ORM, seguridad y migraciones.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install django</div>
+                        <div class="command-box">django-admin startproject myproject</div>
+                        <p class="installation-note">El segundo comando crea un nuevo proyecto Django con estructura completa.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">💬</div>
+                        <h3 class="library-name">ChatterBot</h3>
+                    </div>
+                    <p class="library-description">Librería conversacional con machine learning que aprende de interacciones previas. Genera respuestas basadas en colecciones de declaraciones conocidas.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install chatterbot</div>
+                        <div class="command-box">pip install chatterbot-corpus</div>
+                        <p class="installation-note">ChatterBot-corpus incluye datos de entrenamiento en múltiples idiomas.</p>
+                    </div>
+                </div>
+
+                <div class="library-card">
+                    <div class="card-header">
+                        <div class="library-icon">🔌</div>
+                        <h3 class="library-name">Socket.IO</h3>
+                    </div>
+                    <p class="library-description">Comunicación en tiempo real bidireccional entre cliente y servidor para chats instantáneos. Fallback automático a long-polling si WebSockets no está disponible.</p>
+                    <div class="installation-section">
+                        <div class="installation-title">Instalación</div>
+                        <div class="command-box">pip install python-socketio</div>
+                        <div class="command-box">pip install aiohttp</div>
+                        <p class="installation-note">Aiohttp es necesario para el servidor asíncrono. También instala cliente JavaScript.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
